@@ -14,10 +14,15 @@ class NewsClient {
 
 module.exports = NewsClient
 
-// const anotherApi = new NewsApi
-// let weatherArticles = ''
-// anotherApi.fetchNewsData(news => {
-  // weatherArticles = news
-  // console.log(weatherArticles.response.results)
-// })
+//const anotherApi = new NewsClient
+//let weatherArticles = ''
+//anotherApi.fetchNewsData(news => {
+ // weatherArticles = news
+ // console.log(weatherArticles.response.results)
+ //})
+
+ //anotherApi.fetchNewsData(news => {
+ // weatherArticles = news
+ // console.log(weatherArticles)
+ //})
 
