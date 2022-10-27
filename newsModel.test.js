@@ -19,7 +19,7 @@ describe('NotesModel', () => {
     notesModel.addArticle(article)
     expect(notesModel.viewArticles()[0].title).toEqual('article title')
   })
-  it('adds the first 5 articles and displays them', () => {
+  it('adds the articles and displays them', () => {
     const articles = [{
       webTitle: 'article title',
       webUrl: 'article url',
@@ -61,11 +61,39 @@ describe('NotesModel', () => {
       fields: {
         thumbnail: 'article image 6'
       }
+    },
+    {
+      webTitle: 'article title 7',
+      webUrl: 'article url 7',
+      fields: {
+        thumbnail: 'article image 7'
+      }
+    },
+    {
+      webTitle: 'article title 8',
+      webUrl: 'article url 8',
+      fields: {
+        thumbnail: 'article image 8'
+      }
+    },
+    {
+      webTitle: 'article title 9',
+      webUrl: 'article url 9',
+      fields: {
+        thumbnail: 'article image 9'
+      }
+    },
+    {
+      webTitle: 'article title 10',
+      webUrl: 'article url 10',
+      fields: {
+        thumbnail: 'article image 10'
+      }
     }
   ]
     const notesModel = new NotesModel
     notesModel.addArticles(articles)
-    expect(notesModel.viewArticles().length).toEqual(5)
+    expect(notesModel.viewArticles().length).toEqual(10)
     expect(notesModel.viewArticles()[4].title).toEqual('article title 5')
   })
 })

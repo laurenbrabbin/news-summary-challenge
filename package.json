@@ -4,7 +4,8 @@
   "description": "* Feel free to use Google, your notes, books, etc. but work on your own. * If you refer to the solution of another coach or student, please put a link to that in   your README. * If you have a partial solution, **still check in a partial solution** and send in a pull   request. * You must submit a pull request to this repo with your code by 10am Monday morning.",
   "main": "apiKey.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild index.js --bundle  --outfile=bundle.js --watch"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
     "got": "^11.8.5",
     "jest": "^29.2.2",
     "jest-environment-jsdom": "^29.2.2",
-    "jest-fetch-mock": "^3.0.3"
+    "jest-fetch-mock": "^3.0.3",
+    "package-stream": "^3.1.0"
   }
 }
