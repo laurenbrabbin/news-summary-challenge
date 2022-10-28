@@ -33,6 +33,9 @@
         viewArticles() {
           return this.articles;
         }
+        refreshNews() {
+          this.articles = [];
+        }
       };
       module.exports = NewsModel2;
     }
@@ -46,16 +49,30 @@
           this.model = model2;
           this.client = client2;
           this.mainContainerEl = document.querySelector("#main-container");
+          this.buttonEl = document.querySelector("#refresh-news-button");
+          this.buttonEl.addEventListener("click", () => {
+            this.model.refreshNews();
+            this.displayArticles();
+          });
         }
         newArticle = (article) => {
-          const newParagraph = document.createElement("div");
-          newParagraph.textContent = article.title;
-          newParagraph.className = "article";
-          this.mainContainerEl.append(newParagraph);
+          const newArticle = document.createElement("a");
+          const newImage = document.createElement("img");
+          const text = document.createElement("h4");
+          text.innerHTML = article.title;
+          newImage.src = article.image;
+          newArticle.href = article.url;
+          newArticle.append(text);
+          newArticle.append(newImage);
+          newArticle.className = "article";
+          this.mainContainerEl.append(newArticle);
         };
         displayArticles() {
+          document.querySelectorAll(".article").forEach((article) => {
+            article.remove();
+          });
           this.client.fetchNewsData((data) => {
-            const articles = data.response.results;
+            let articles = data.response.results;
             this.model.addArticles(articles);
             this.model.viewArticles().map(this.newArticle);
           });
@@ -85,6 +102,7 @@
         }
       };
       module.exports = NewsClient2;
+      var anotherApi = new NewsClient2();
     }
   });
 
@@ -95,5 +113,4 @@
   var client = new NewsClient();
   var model = new NewsModel();
   var view = new NewsView(model, client);
-  view.displayArticles();
 })();

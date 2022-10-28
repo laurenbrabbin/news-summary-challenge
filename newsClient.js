@@ -14,7 +14,7 @@ class NewsClient {
 
 module.exports = NewsClient
 
-//const anotherApi = new NewsClient
+const anotherApi = new NewsClient
 //let weatherArticles = ''
 //anotherApi.fetchNewsData(news => {
  // weatherArticles = news
@@ -22,7 +22,7 @@ module.exports = NewsClient
  //})
 
  //anotherApi.fetchNewsData(news => {
- // weatherArticles = news
- // console.log(weatherArticles)
+ //weatherArticles = news
+ //console.log(weatherArticles.response.results)
  //})
 

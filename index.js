@@ -7,4 +7,4 @@ const model = new NewsModel();
 const view = new NewsView(model, client)
 
 
-view.displayArticles()
+//view.displayArticles()

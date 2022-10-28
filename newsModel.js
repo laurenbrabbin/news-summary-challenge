@@ -28,6 +28,10 @@ class NewsModel {
   viewArticles(){
     return this.articles
   }
+
+  refreshNews(){
+    this.articles = []
+  }
 }
 
 module.exports = NewsModel
