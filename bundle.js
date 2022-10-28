@@ -31,7 +31,7 @@
           return this.articles;
         }
         matchingKeyword = (article) => {
-          if (article.title.includes(this.keyword)) {
+          if (article.title.toLowerCase().includes(this.keyword.toLowerCase())) {
             this.relevantArticles.push(article);
           }
         };
