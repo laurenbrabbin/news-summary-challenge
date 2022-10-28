@@ -10,15 +10,15 @@
       var NewsModel2 = class {
         constructor() {
           this.articles = [];
-          this.keyword = "";
+          this.keyword = "undefined";
           this.relevantArticles = [];
         }
         addArticles(articles) {
           this.articles = [];
-          this.addArticle(articles[0]);
-          this.addArticle(articles[1]);
-          this.addArticle(articles[2]);
-          this.addArticle(articles[3]);
+          this.articles = [];
+          articles.forEach((article) => {
+            this.addArticle(article);
+          });
         }
         addArticle = (article) => {
           const newArticle = {};
@@ -31,7 +31,7 @@
           return this.articles;
         }
         matchingKeyword = (article) => {
-          if (article.title.toLowerCase().includes(this.keyword.toLowerCase())) {
+          if (article.title.includes(this.keyword)) {
             this.relevantArticles.push(article);
           }
         };

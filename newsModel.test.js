@@ -87,9 +87,8 @@ describe('NotesModel', () => {
   ]
     const notesModel = new NotesModel
     notesModel.addArticles(articles)
-    notesModel.matchingArticles('dog')
-    expect(notesModel.matchingArticles().length).toEqual(1)
-    expect(notesModel.matchingArticles()[0].title).toEqual('article dog')
+    console.log(notesModel.viewArticles())
+    expect(notesModel.matchingArticles('dog')[0].title).toBe('article dog')
   })
 })
 
