@@ -7,8 +7,16 @@ class NewsView {
     this.buttonEl = document.querySelector('#refresh-news-button');
 
     this.buttonEl.addEventListener('click', () => {
-      this.model.refreshNews()
       this.displayArticles()
+    });
+
+    this.searchButtonEl = document.querySelector('#search-news-button');
+
+    this.searchButtonEl.addEventListener('click', () => {
+      const keyword = document.querySelector('#search-term').value
+      this.displayRelevantArticles(keyword);
+      const inputEl = document.querySelector('#search-term');
+      inputEl.value = ''
     });
   }
 
@@ -37,6 +45,18 @@ class NewsView {
       let articles = data.response.results
       this.model.addArticles(articles)
       this.model.viewArticles().map(this.newArticle)
+    })
+  }
+
+  displayRelevantArticles(keyword){
+    document.querySelectorAll('.article').forEach(article => {
+      article.remove()
+    })
+
+    this.client.fetchNewsData((data) => {
+      let articles = data.response.results
+      this.model.addArticles(articles)
+      this.model.matchingArticles(keyword).map(this.newArticle)
     })
   }
 }

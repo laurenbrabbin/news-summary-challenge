@@ -10,18 +10,15 @@
       var NewsModel2 = class {
         constructor() {
           this.articles = [];
+          this.keyword = "";
+          this.relevantArticles = [];
         }
         addArticles(articles) {
+          this.articles = [];
           this.addArticle(articles[0]);
           this.addArticle(articles[1]);
           this.addArticle(articles[2]);
           this.addArticle(articles[3]);
-          this.addArticle(articles[4]);
-          this.addArticle(articles[5]);
-          this.addArticle(articles[6]);
-          this.addArticle(articles[7]);
-          this.addArticle(articles[8]);
-          this.addArticle(articles[9]);
         }
         addArticle = (article) => {
           const newArticle = {};
@@ -33,8 +30,16 @@
         viewArticles() {
           return this.articles;
         }
-        refreshNews() {
-          this.articles = [];
+        matchingKeyword = (article) => {
+          if (article.title.includes(this.keyword)) {
+            this.relevantArticles.push(article);
+          }
+        };
+        matchingArticles(keyword) {
+          this.relevantArticles = [];
+          this.keyword = keyword;
+          this.articles.map(this.matchingKeyword);
+          return this.relevantArticles;
         }
       };
       module.exports = NewsModel2;
@@ -51,8 +56,14 @@
           this.mainContainerEl = document.querySelector("#main-container");
           this.buttonEl = document.querySelector("#refresh-news-button");
           this.buttonEl.addEventListener("click", () => {
-            this.model.refreshNews();
             this.displayArticles();
+          });
+          this.searchButtonEl = document.querySelector("#search-news-button");
+          this.searchButtonEl.addEventListener("click", () => {
+            const keyword = document.querySelector("#search-term").value;
+            this.displayRelevantArticles(keyword);
+            const inputEl = document.querySelector("#search-term");
+            inputEl.value = "";
           });
         }
         newArticle = (article) => {
@@ -75,6 +86,16 @@
             let articles = data.response.results;
             this.model.addArticles(articles);
             this.model.viewArticles().map(this.newArticle);
+          });
+        }
+        displayRelevantArticles(keyword) {
+          document.querySelectorAll(".article").forEach((article) => {
+            article.remove();
+          });
+          this.client.fetchNewsData((data) => {
+            let articles = data.response.results;
+            this.model.addArticles(articles);
+            this.model.matchingArticles(keyword).map(this.newArticle);
           });
         }
       };

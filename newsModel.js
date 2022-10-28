@@ -1,19 +1,16 @@
 class NewsModel {
   constructor() {
     this.articles = []
+    this.keyword = ''
+    this.relevantArticles = []
   }
 
   addArticles(articles){
+    this.articles = []
     this.addArticle(articles[0])
     this.addArticle(articles[1])
     this.addArticle(articles[2])
     this.addArticle(articles[3])
-    this.addArticle(articles[4])
-    this.addArticle(articles[5])
-    this.addArticle(articles[6])
-    this.addArticle(articles[7])
-    this.addArticle(articles[8])
-    this.addArticle(articles[9])
   }
 
   addArticle = (article) => {
@@ -29,8 +26,18 @@ class NewsModel {
     return this.articles
   }
 
-  refreshNews(){
-    this.articles = []
+
+  matchingKeyword = (article) => {
+    if(article.title.includes(this.keyword)){
+      this.relevantArticles.push(article) 
+    }
+  }
+
+  matchingArticles(keyword){
+    this.relevantArticles = []
+    this.keyword = keyword
+    this.articles.map(this.matchingKeyword)
+    return this.relevantArticles
   }
 }
 

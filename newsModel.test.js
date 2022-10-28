@@ -47,54 +47,49 @@ describe('NotesModel', () => {
       fields: {
         thumbnail: 'article image 4'
       }
-    },
-    {
-      webTitle: 'article title 5',
-      webUrl: 'article url 5',
+    }
+  ]
+    const notesModel = new NotesModel
+    notesModel.addArticles(articles)
+    expect(notesModel.viewArticles().length).toEqual(4)
+    expect(notesModel.viewArticles()[3].title).toEqual('article title 4')
+  })
+
+  it('returns articles with matching key word', () => {
+    const articles = [{
+      webTitle: 'article dog',
+      webUrl: 'article url',
       fields: {
-        thumbnail: 'article image 5'
+        thumbnail: 'article image'
+      }
+    }, 
+    {
+      webTitle: 'article cat',
+      webUrl: 'article url 2',
+      fields: {
+        thumbnail: 'article image 2'
       }
     },
     {
-      webTitle: 'article title 6',
-      webUrl: 'article url 6',
+      webTitle: 'article rabbit',
+      webUrl: 'article url 3',
       fields: {
-        thumbnail: 'article image 6'
+        thumbnail: 'article image 3'
       }
     },
     {
-      webTitle: 'article title 7',
-      webUrl: 'article url 7',
+      webTitle: 'article mouse',
+      webUrl: 'article url 4',
       fields: {
-        thumbnail: 'article image 7'
-      }
-    },
-    {
-      webTitle: 'article title 8',
-      webUrl: 'article url 8',
-      fields: {
-        thumbnail: 'article image 8'
-      }
-    },
-    {
-      webTitle: 'article title 9',
-      webUrl: 'article url 9',
-      fields: {
-        thumbnail: 'article image 9'
-      }
-    },
-    {
-      webTitle: 'article title 10',
-      webUrl: 'article url 10',
-      fields: {
-        thumbnail: 'article image 10'
+        thumbnail: 'article image 4'
       }
     }
   ]
     const notesModel = new NotesModel
     notesModel.addArticles(articles)
-    expect(notesModel.viewArticles().length).toEqual(10)
-    expect(notesModel.viewArticles()[4].title).toEqual('article title 5')
+    notesModel.matchingArticles('dog')
+    expect(notesModel.matchingArticles().length).toEqual(1)
+    expect(notesModel.matchingArticles()[0].title).toEqual('article dog')
   })
 })
 
